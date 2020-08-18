@@ -14,6 +14,10 @@ describe("POST /", function () {
     expect(resp.body).toEqual({ shipped: expect.any(Number) });
   });
 
+  // Have at least one test for invalidness
+  // Have a test for data that you didn't expect. Invalid when additional fields are included.
+  // Submitting good data + a new field should fail the validation. Prevent security holes with 
+  // extra properties.
   test("invalid when productId is less than 1000.", async function () {
     const resp = await request(app).post("/shipments").send({
       productId: 1,
