@@ -1,0 +1,32 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "http://shipit.com/shipment.schema.json",
+	"title": "Shipment",
+	"description": "Data for a shipment.",
+	"type": "object",
+	"properties": {
+		"productId": {
+			"type": "integer",
+			"minimum": 1000
+		},
+		"name": {
+			"type": "string",
+			"pattern": "^\\w+\\s\\w+$"
+		},
+		"addr": {
+			"type": "string",
+			"pattern": "^\\d+\\s\\w+\\s\\w+$"
+		},
+		"zip": {
+			"type": "string",
+			"pattern": "\\d{5}-\\d{4}"
+		}
+	},
+	"additionalProperties": false,
+	"required": [
+		"productId",
+		"name",
+		"addr",
+		"zip"
+	]
+}
