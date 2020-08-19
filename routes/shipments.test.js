@@ -1,3 +1,9 @@
+//TODO: put this at the top before everything else
+
+const shipIt = require('../shipItApi.js')
+shipIt.shipProduct = jest.fn()
+shipIt.shipProduct.mockReturnValue(7)
+
 const request = require("supertest");
 const app = require("../app");
 

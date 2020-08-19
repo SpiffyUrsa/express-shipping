@@ -8,9 +8,9 @@ const { BadRequestError } = require("../expressError");
 
 const { shipProduct } = require("../shipItApi");
 
-/** POST /ship
- *
- * VShips an order coming from json body:
+/**
+ * POST /shipments
+ * Makes a POST request to /ship on the ShipIt API. (ships an order coming from json body).
  *   { productId, name, addr, zip }
  *
  * Returns { shipped: shipId }
@@ -19,14 +19,14 @@ const { shipProduct } = require("../shipItApi");
 router.post("/", async function (req, res, next) {
   try {
     
-    const result = jsonschema.validate(req.body, shipmentSchema);
+    const result = jsonschema.validate(req.body, shipmentSchema)
     if (!result.valid) {
-      let errs = result.errors.map(err => err.stack);
-      throw new BadRequestError(errs);
+      let errs = result.errors.map(err => err.stack)
+      throw new BadRequestError(errs)
     }
-    const { productId, name, addr, zip } = req.body;
-    const shipId = await shipProduct({ productId, name, addr, zip });
-    return res.json({ shipped: shipId });
+    const { productId, name, addr, zip } = req.body
+    const shipId = await shipProduct({ productId, name, addr, zip })
+    return res.json({ shipped: shipId })
   } catch (err) {
     return next(err);
   }
